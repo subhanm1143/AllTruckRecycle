@@ -59,7 +59,7 @@ function Search() {
   
   // Fetch data when searchQueries change
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/items`, {
+    axios.get(`https://alltruckrecycle.onrender.com/api/items`, {
       params: searchQueries
     })
       .then(response => {
@@ -120,7 +120,7 @@ function Search() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/users/login", { email, password });
+      const response = await axios.post("https://alltruckrecycle.onrender.com/api/users/login", { email, password });
       if (response.status === 200) {
         setIsLoggedIn(true);
         console.log("Login successful");
@@ -147,7 +147,7 @@ function Search() {
   const handleAccountCreation = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/users", { email, password });
+      const response = await axios.post("https://alltruckrecycle.onrender.com/api/users", { email, password });
       if (response.status === 201) {
         openDialog('successDialog'); // Open success dialog
         closeDialog('createAccountDialog'); // Close create account dialog

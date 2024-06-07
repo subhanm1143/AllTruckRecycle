@@ -17,13 +17,13 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/items")
+    axios.get("https://alltruckrecycle.onrender.com/api/items")
       .then(response => {
         setParts(response.data);
       })
       .catch(error => console.error(error));
 
-    axios.get("http://localhost:5000/api/carsearch")
+    axios.get("https://alltruckrecycle.onrender.com/api/carsearch")
       .then(response => {
         const makesArray = Object.values(response.data);
         setMakes(makesArray);
@@ -109,7 +109,7 @@ function App() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/users/login", { email, password });
+      const response = await axios.post("https://alltruckrecycle.onrender.com/api/users/login", { email, password });
       console.log("Response from server:", response); // Log the entire response object
   
       if (response.status === 200) {
@@ -147,7 +147,7 @@ function App() {
   const handleAccountCreation = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/users", { email, password });
+      const response = await axios.post("https://alltruckrecycle.onrender.com/api/users", { email, password });
       if (response.status === 201) {
         openDialog('successDialog'); // Open success dialog
         closeDialog('createAccountDialog'); // Close create account dialog
@@ -165,7 +165,7 @@ function App() {
     const storedToken = localStorage.getItem('token');
 
     if (storedToken) {
-      axios.post('http://localhost:5000/api/authenticate', { token: storedToken })
+      axios.post('https://alltruckrecycle.onrender.com/api/authenticate', { token: storedToken })
         .then(response => {
           if (response.data.success) {
             setIsAdmin(true);

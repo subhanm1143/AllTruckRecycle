@@ -65,7 +65,7 @@ function Cart() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/users/login", { email, password });
+      const response = await axios.post("https://alltruckrecycle.onrender.com/api/users/login", { email, password });
       if (response.status === 200) {
         setIsLoggedIn(true);
         console.log("Login successful");
@@ -91,7 +91,7 @@ function Cart() {
   const handleAccountCreation = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/users", { email, password });
+      const response = await axios.post("https://alltruckrecycle.onrender.com/api/users", { email, password });
       if (response.status === 201) {
         openDialog('successDialog'); // Open success dialog
         closeDialog('createAccountDialog'); // Close create account dialog
@@ -152,7 +152,7 @@ function Cart() {
         const headers = {
           "Content-Type": "application/json"
         };
-        const response = await fetch('http://localhost:5000/create-checkout-session', {
+        const response = await fetch('https://alltruckrecycle.onrender.com/create-checkout-session', {
           method: "POST",
           headers: headers,
           body: JSON.stringify(body)

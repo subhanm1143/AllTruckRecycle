@@ -10,7 +10,7 @@ function Shipping() {
   useEffect(() => {
     const fetchSales = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/sold');
+        const response = await axios.get('https://alltruckrecycle.onrender.com/api/sold');
         const sortedSales = response.data.sort((a, b) => (a.shipped === b.shipped ? 0 : a.shipped ? 1 : -1));
         setSales(sortedSales);
       } catch (error) {
@@ -24,7 +24,7 @@ function Shipping() {
   const handleMarkAsShipped = async (saleId) => {
     try {
       // Make a PUT request to update the sale with the shipped status
-      await axios.put(`http://localhost:5000/api/sold/${saleId}`, { shipped: true });
+      await axios.put(`https://alltruckrecycle.onrender.com/api/sold/${saleId}`, { shipped: true });
       
       // Update the local state to reflect the change
       setSales(prevSales => {

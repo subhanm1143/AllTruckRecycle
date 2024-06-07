@@ -31,7 +31,7 @@ function Success() {
 
       try {
         const { storedSoldItems, storedAddress, storedEmail } = data;
-        const response = await axios.post('http://localhost:5000/api/solditems', {
+        const response = await axios.post('https://alltruckrecycle.onrender.com/api/solditems', {
           itemsArray: JSON.parse(storedSoldItems),
           address: storedAddress,
           email: storedEmail
@@ -44,7 +44,7 @@ function Success() {
           const items = JSON.parse(storedSoldItems);
           for (const item of items) {
             try {
-              await axios.delete(`http://localhost:5000/api/items/${item._id}`);
+              await axios.delete(`https://alltruckrecycle.onrender.com/api/items/${item._id}`);
             } catch (error) {
               console.error(`Error deleting item ${item._id}:`, error);
             }

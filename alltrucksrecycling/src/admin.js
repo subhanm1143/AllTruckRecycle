@@ -53,7 +53,7 @@ function Admin() {
     const authenticateUser = async () => {
       try {
         // Send a request to the server to authenticate the user
-        const response = await axios.post('http://localhost:5000/api/authenticate', {
+        const response = await axios.post('https://alltruckrecycle.onrender.com/api/authenticate', {
           token: storedToken
         });
         
@@ -79,7 +79,7 @@ function Admin() {
 
   useEffect(() => {
     if (id) {
-      axios.get(`http://localhost:5000/api/items/${id}`)
+      axios.get(`https://alltruckrecycle.onrender.com/api/items/${id}`)
         .then(response => {
           setPart(response.data);
         })
@@ -88,14 +88,14 @@ function Admin() {
   }, [id]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/items")
+    axios.get("https://alltruckrecycle.onrender.com/api/items")
       .then(response => {
         setParts(response.data);
       })
       .catch(error => console.error(error));
       const fetchData = async () => {
         try {
-          const response = await axios.get("http://localhost:5000/api/carsearch");
+          const response = await axios.get("https://alltruckrecycle.onrender.com/api/carsearch");
           setCarSearches(response.data);
         } catch (error) {
           console.error(error);
@@ -115,7 +115,7 @@ function Admin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/items', newPart)
+    axios.post('https://alltruckrecycle.onrender.com/api/items', newPart)
       .then(response => {
         alert('Part added successfully!');
         setNewPart({
@@ -128,7 +128,7 @@ function Admin() {
           price: '',
           imageUrl: ''
         });
-        axios.get("http://localhost:5000/api/items")
+        axios.get("https://alltruckrecycle.onrender.com/api/items")
           .then(response => {
             setParts(response.data);
           })
@@ -152,7 +152,7 @@ function Admin() {
   };
 
   const handleEdit = () => {
-    axios.put(`http://localhost:5000/api/items/${selectedPart._id}`, editValues)
+    axios.put(`https://alltruckrecycle.onrender.com/api/items/${selectedPart._id}`, editValues)
       .then(response => {
         alert('Part updated successfully!');
         setOpen(false);
@@ -165,7 +165,7 @@ function Admin() {
   };
 
   const handleDelete = () => {
-    axios.delete(`http://localhost:5000/api/items/${selectedPart._id}`)
+    axios.delete(`https://alltruckrecycle.onrender.com/api/items/${selectedPart._id}`)
       .then(response => {
         alert('Part deleted successfully!');
         setParts(items.filter(item => item._id !== selectedPart._id));
@@ -232,7 +232,7 @@ function Admin() {
   // Function to handle deleting a model
 const handleDeleteModel = (model) => {
   // Send a DELETE request to delete the specified model from the selected make
-  axios.delete(`http://localhost:5000/api/carsearch/${selectedMake}/models/${model}`)
+  axios.delete(`https://alltruckrecycle.onrender.com/api/carsearch/${selectedMake}/models/${model}`)
     .then(response => {
       // Handle success
       alert(`Model "${model}" deleted successfully from ${selectedMake}`);
@@ -265,7 +265,7 @@ const handleDeleteModel = (model) => {
 const handleAddModel = () => {
   if (newModel.trim() !== "") {
     // Send a POST request to add the new model to the specified make
-    axios.post(`http://localhost:5000/api/carsearch/${selectedMake}/models`, { model: newModel })
+    axios.post(`https://alltruckrecycle.onrender.com/api/carsearch/${selectedMake}/models`, { model: newModel })
       .then(response => {
         // Handle success
         alert(`Model "${newModel}" added successfully to ${selectedMake}`);

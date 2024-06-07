@@ -27,7 +27,7 @@ const Slider = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/items")
+    axios.get("https://alltruckrecycle.onrender.com/api/items")
       .then(response => {
         setItems(response.data);
       })
