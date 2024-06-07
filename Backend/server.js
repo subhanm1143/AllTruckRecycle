@@ -13,12 +13,13 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: 'https://alltruckrecycling.onrender.com', // Add the correct frontend origin here
+  origin: 'https://alltruckrecycling.onrender.com', // Allow requests from your frontend URL
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // If you need to include cookies in the requests
+  credentials: true // Allow cookies and credentials
 }));
 app.use(express.json());
 app.use(bodyParser.json());
+
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
