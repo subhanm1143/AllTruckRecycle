@@ -1,0 +1,445 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #7F8E9E;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+.App {
+  text-align: center;
+}
+.nav-bar-link {
+  text-decoration: none;
+  color: white;
+}
+.nav-bar-link p {
+  margin: 0px;
+  transition: transform 0.3s ease; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.nav-bar-link:hover p {
+  transform: scale(0.9);
+}
+
+.Header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Header img {
+  width: 100px;
+  height: auto;
+}
+
+.search-container {
+  margin-right: 20px; /* Add margin for spacing between search and icons */
+}
+
+.Icons {
+  display: flex;
+  align-items: center;
+}
+
+.Icons a {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit color from parent */
+}
+
+.Profile,
+.Cart {
+  margin-right: 20px; /* Add margin for spacing between profile and cart */
+}
+
+.Admin {
+  margin-right: 10px; /* Adjust margin for spacing between admin and other icons */
+  padding-right: 80px;
+}
+
+.Profile img,
+.Cart img,
+.Admin {
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Add transition property for smooth effect */
+}
+
+.Profile img:hover,
+.Cart img:hover,
+.Admin:hover {
+  transform: scale(1.2); /* Increase size on hover */
+}
+/*This is the Dialog */
+/* App.css */
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.profile-form label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.profile-form input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+dialog button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.profile-form button:hover {
+  background-color: #0056b3;
+}
+/* Add this to your CSS file */
+.alreadyLoggedin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Adjust the gap as needed */
+  padding: 20px;
+  position: relative;
+}
+
+
+
+.search-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.search-container button {
+  width: 100px;
+  height: 46px;
+  background-color: black;
+  color: white;
+  font-size: large;
+  font-weight: bolder;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.search-container input {
+  width: 500px;
+  height: 40px;
+  background-color: white;
+  color: black;
+}
+
+.secondsearch {
+  background: linear-gradient(to bottom, #7F8E9E, #4279A3);
+}
+
+.secondsearch h1 {
+  margin: 0;
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+.Info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-item {
+  margin-right: 10px;
+}
+.search-item select{
+  width: 200px;
+}
+
+button[type="search"] {
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+button[type="search"]:hover {
+  background-color: #717171;
+}
+
+select {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.partnumber {
+  align-self: center;
+  background: linear-gradient(to bottom, #4279A3, #476C8A);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.partnumber .search-container {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  padding-bottom: 9px;
+}
+
+.partnumber .search-container input {
+  width: 180px;
+  height:44px;
+}
+
+.new {
+  margin: 0;
+  padding: 20px;
+  background:  #476C8A;
+}
+
+.new h1 {
+  margin: 0;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.items {
+  background: radial-gradient(#3385c6, #476C8A);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-evenly;
+  padding: 5%;
+  gap: 20px;
+}
+
+.car-part-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.car-part-card {
+  background-color: bisque;
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 8px;
+  transition: box-shadow 0.3s;
+  height: 350px; /* Set fixed height for the card */
+  width: 250px; /* Set fixed width for the card */
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.car-part-card img {
+  width: 100%; /* Adjust image width to fill container */
+  height: 150px; /* Set fixed height for the image */
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.car-part-card h2 {
+  margin: 10px 0 0; /* Adjust margin */
+  font-size: 1rem; /* Reduce font size */
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.car-part-card p {
+  margin: 8px 0;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-height: 3rem; /* Set a fixed height for the description */
+}
+
+.car-part-card a {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease-in-out; /* Reduce transition duration */
+}
+
+.car-part-card a:hover {
+  text-decoration: none;
+}
+
+.car-part-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.1); /* Reduce scaling on hover */
+}
+.car-part-card .add-to-cart-button,
+.car-part-card .remove-from-cart-button {
+  color: white; /* White text */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add some padding */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Get block-level display */
+  font-size: 16px; /* Increase font size */
+  margin: 10px 2px; /* Add some margin */
+  cursor: pointer; /* Add a pointer on hover */
+  border-radius: 10px; /* Rounded corners */
+  transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+.car-part-card .add-to-cart-button {
+  background-color: #4CAF50; /* Green background */
+}
+
+.car-part-card .remove-from-cart-button {
+  background-color: #ff4040; /* Red background */
+}
+
+.car-part-card .add-to-cart-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.car-part-card .remove-from-cart-button:hover {
+  background-color: #d22f1f; /* Darker red on hover */
+}
+
+
+footer {
+  background: #000;
+  color: #fff;
+  padding-left: 50px;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  padding-top: 5px;
+  padding-right: 20px;
+}
+
+.footer-right img {
+  width: 30px;
+  height: 30px;
+}
+
+.footer-right p {
+  margin-bottom: 20px;
+  text-align: left;
+  text-decoration: none;
+  color: white;
+  padding-right: 10px;
+  font-family: Georgia, sans-serif;
+  line-height: 1.5;
+}
+
+.map-footer {
+  margin-top: 0;
+  padding-bottom: 10px;
+}
+
+.footer-nav-bar {
+  text-align: center;
+  background-color: #000;
+}
+
+.footer-nav-bar a, .footer-nav-bar a:visited {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.footer-nav-bar a:hover {
+  text-decoration: underline;
+}
+
+.logo, .footer-right img, .phone-image img, .qr-code img {
+  max-width: 100%;
+  height: auto;
+}
+
+.photo-collection .photo {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .top {
+    height: 200px;
+    padding-top: 1%;
+  }
+
+  .nav-bar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nav-bar-link p {
+    font-size: 14px;
+  }
+
+  .text-block h2 {
+    font-size: 1.5em;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  .featured-column {
+    width: 100%;
+  }
+
+  .logo {
+    flex-basis: 100%;
+    order: -1;
+    margin-bottom: 20px;
+  }
+
+  .nav-bar, li {
+    text-align: center;
+  }
+
+  .footer-right {
+    flex-direction: column;
+    align-items: center;
+  }
+}

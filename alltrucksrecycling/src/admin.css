@@ -1,0 +1,182 @@
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    gap: 0px;
+    padding: 20px;
+  }
+  
+  .input-grid input {
+    padding: 10px;
+    font-size: 16px;
+  }
+  .AddParts {
+    text-align: center;
+    padding: 10px;
+    background: linear-gradient(to bottom, #7F8E9E, #476c8a);
+  }
+  .AddParts button{
+    height: 40px;
+    width: 50%;
+  }
+  .AddParts button:hover {
+    background-color: rgb(22, 117, 226);
+  }
+
+  /* Styling for the popup */
+.popup-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 80%; /* Adjust the width as needed */
+    height: 80%; /* Adjust the height as needed */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 9999; /* Ensure the popup appears above other content */
+  }
+  
+  /* Styling for the overlay */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 999; /* Ensure the overlay covers the entire screen */
+  }
+  
+  .edit{
+    text-align: center;
+    background: linear-gradient(to bottom, #476c8a, #3385c6);
+  }
+  .edit h1{
+    margin:0;
+    padding: 20px;
+  }
+  .search-box{
+    background-color: #3385c6;
+    margin: 0;
+  }
+  .items-admin {
+    background: linear-gradient(to top, #7F8E9E, #3385c6);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    padding: 5%; /* Increase padding for more space around the container */
+    gap: 20px; /* Add gap between cards */
+  }
+
+  .search-container-admin {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    padding-right: 24%;
+  }
+  
+  .search-container-admin button {
+    width: 100px;
+    height: 46px;
+    background-color: black;
+    color: white;
+    font-size: large;
+    font-weight: bolder;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .search-container-admin input {
+    width: 500px;
+    height: 40px;
+    background-color: white;
+    color: black;
+  }
+  .makesmodels-container {
+    display: flex;
+    background: #476c8a;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .make-dropdown {
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .models-container {
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center; /* Center the text */
+  }
+  
+  .models-container h3 {
+    margin-top: 0;
+  }
+  
+  
+  .models-container ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex; /* Display models left to right */
+    flex-wrap: wrap; /* Allow models to wrap to next line */
+  }
+  
+  .models-container li {
+    padding: 5px 10px; /* Add padding to each model */
+    margin-right: 10px; /* Add margin between models */
+  }
+  
+  .models-container button {
+    margin-left: 5px; /* Add margin between model text and delete button */
+  }
+  .make-dropdown,
+.Makes,
+.MakesButton {
+  padding: 8px; /* Adjust padding for consistency */
+  font-size: 16px; /* Adjust font size */
+  margin-bottom: 10px; /* Add margin bottom for spacing */
+}
+.MakesButton{
+  margin-right: 10px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  background-color: #7F8E9E;
+}
+
+.pagination button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.pagination button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.pagination button:disabled:hover {
+  background-color: #ddd;
+}
+
+
+  
+  
+  

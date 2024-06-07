@@ -1,0 +1,68 @@
+.Cart-section {
+    text-align: center; /* Center align all text */
+    background: #476C8A;
+  }
+.Cart-section p{
+    margin:0;
+}
+.yourcart h1{
+    margin:0;
+    padding: 20px;
+    background: linear-gradient(to bottom, #7F8E9E, #476C8A);
+}
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+  }
+  
+  .Cart-section [type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+  }
+  
+  .Cart-section button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  .shipping-details {
+    text-align: center;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    display: block;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .input-group.big {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .input-group.small {
+    width: calc(33.33% - 10px);
+    display: inline-block;
+  }
+  
+  /* Adjust spacing between small input fields */
+  .input-group.small + .input-group.small {
+    margin-left: 2px;
+  }
+  

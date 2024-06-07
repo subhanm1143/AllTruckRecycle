@@ -1,0 +1,88 @@
+.back {
+    background-color: #3385c6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .Success-container {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center the contents of the container */
+  }
+  
+  .Success-heading {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .Success-message {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .SoldItems-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  .SoldItems-item {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .ShippingAddress {
+    margin-top: 20px;
+  }
+  
+  .ShippingAddress-heading {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .ShippingAddress-details {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .Email {
+    margin-top: 20px;
+  }
+  
+  .Email-heading {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .Email-details {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .BackHome-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #007bff;
+    background-color: #fff;
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .BackHome-link:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
