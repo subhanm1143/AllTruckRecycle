@@ -276,6 +276,9 @@ app.delete("/api/carsearch/:make/models/:model", async (req, res) => {
   }
 });
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// API endpoints
 app.post('/create-checkout-session', async (req, res) => {
   try {
     const { products } = req.body;
@@ -300,7 +303,7 @@ app.post('/create-checkout-session', async (req, res) => {
       line_items: lineItems,
       mode: 'payment',
       success_url: 'https://alltruckrecycling.onrender.com/Success', // Redirect URL after successful payment
-      cancel_url: 'http://localhost:3000/cancel', // Redirect URL if payment is canceled
+      cancel_url: 'https://alltruckrecycling.onrender.com/cancel', // Redirect URL if payment is canceled
     });
 
     res.json({ id: session.id }); // Return the session ID to the client
@@ -309,6 +312,7 @@ app.post('/create-checkout-session', async (req, res) => {
     res.status(500).json({ error: 'Failed to create checkout session' });
   }
 });
+
 
 app.post('/api/solditems', async (req, res) => {
   try {
