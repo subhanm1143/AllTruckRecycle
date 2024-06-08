@@ -191,9 +191,11 @@ function App() {
   return (
     <div className="App">
       <div className="Header">
-        <a className="nav-bar-link" href="/About">
-          <p className='logo'><img className="logo" src="img/Logo.png" alt="Logo" /></p>
-        </a>
+      <Link to="/About" className="nav-bar-link">
+          <p className="logo">
+            <img className="logo" src="img/Logo.png" alt="Logo" />
+          </p>
+        </Link>
         <div className="search-container">
           <button type="search" onClick={handleSearch}>Search</button>
           <input
