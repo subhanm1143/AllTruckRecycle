@@ -226,11 +226,11 @@ function Search() {
             </p>
           </div>
           <div className='Cart'>
-            <a href="/Cart">
+            <Link to="/Cart">
               <p>
                 <img className="logo" src="/img/cart.png" alt="Cart" />
               </p>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -367,7 +367,7 @@ function Search() {
             </a>
             <a className="nav-bar-link" href="https://www.google.com/maps/place/All+Trucks+Recycling/@38.5671157,-121.2559699,16z/data=!3m1!4b1!4m6!3m5!1s0x809ae81a3a571c01:0x9506e53facea0ca4!8m2!3d38.5671157!4d-121.253395!16s%2Fg%2F1tcv6krz?entry=ttu">
               <p>
-                <img src="/Icons/iconsGoogle.png" alt="Google" />
+                <img src="/Icons/IconsGoogle.png" alt="Google" />
               </p>
             </a>
           </div>

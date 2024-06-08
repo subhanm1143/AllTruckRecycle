@@ -145,11 +145,11 @@ const removeFromCart = () => {
             </p>
           </div>
           <div className='Cart'>
-            <a href="/Cart">
+            <Link to="/Cart">
               <p>
                 <img className="logo" src="/img/cart.png" alt="Cart" />
               </p>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
