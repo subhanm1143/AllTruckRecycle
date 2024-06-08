@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 require('dotenv').config(); // Load environment variables
 const stripe = require('stripe')(process.env.STRIPE);
+const path = require('path');
 
 
 
@@ -277,6 +278,8 @@ app.delete("/api/carsearch/:make/models/:model", async (req, res) => {
   }
 });
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 // API endpoints
 app.post('/create-checkout-session', async (req, res) => {
   try {
@@ -301,8 +304,8 @@ app.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: '/success', // Redirect URL after successful payment
-      cancel_url: '/cancel', // Redirect URL if payment is canceled
+      success_url: 'https://alltruckrecycling.onrender.com/success', // Redirect URL after successful payment
+      cancel_url: 'https://alltruckrecycling.onrender.com/cancel', // Redirect URL if payment is canceled
     });
 
     res.json({ id: session.id }); // Return the session ID to the client
