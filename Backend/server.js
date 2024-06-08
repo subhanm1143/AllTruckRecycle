@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 require('dotenv').config(); // Load environment variables
 const stripe = require('stripe')(process.env.STRIPE);
-const path = require('path');
 
 
 
@@ -277,8 +276,6 @@ app.delete("/api/carsearch/:make/models/:model", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
-
-app.use(express.static(path.join(__dirname, 'client/build')));
 
 // API endpoints
 app.post('/create-checkout-session', async (req, res) => {
