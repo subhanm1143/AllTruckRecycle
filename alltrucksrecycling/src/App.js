@@ -16,6 +16,16 @@ function App() {
 
   const navigate = useNavigate();
 
+  const isSuccess = searchParams.get('success') === 'true';
+  const isCanceled = searchParams.get('canceled') === 'true';
+
+  if (isSuccess) {
+    navigate('/success');
+  }
+
+  if (isCanceled) {
+    navigate('/cancel');
+  }
   useEffect(() => {
     axios.get("https://alltruckrecycle.onrender.com/api/items")
       .then(response => {
