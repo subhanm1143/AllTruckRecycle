@@ -209,18 +209,18 @@ function App() {
         {isAdmin && (
         <div>
           <div className='Admin'>
-            <a href="/admin">
+          <Link to="/Admin" className="nav-bar-link">
               <p>
                 Admin
               </p>
-            </a>
+            </Link>
           </div>
           <div className='Admin'>
-          <a href="/shippingPage">
+          <Link to="/shippingPage">
             <p>
               Shipping
             </p>
-          </a>
+          </Link>
         </div>
         </div>
         )}
@@ -230,11 +230,11 @@ function App() {
             </p>
           </div>
           <div className='Cart'>
-            <a href="/Cart">
+            <Link to="/Cart">
               <p>
                 <img className="logo" src="/img/cart.png" alt="Cart" />
               </p>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -375,7 +375,6 @@ function App() {
         <h1>NEW INVENTORY</h1>
       </div>
       <div className="items">
-        {/* Display only the newest eight parts */}
         {newestParts.map((part) => (
           <CarPartCard key={part._id} part={part} />
         ))}
