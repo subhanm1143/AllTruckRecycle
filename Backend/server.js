@@ -304,8 +304,8 @@ app.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: 'https://alltruckrecycling.onrender.com/success', // Redirect URL after successful payment
-      cancel_url: 'https://alltruckrecycling.onrender.com/cancel', // Redirect URL if payment is canceled
+      success_url: '/success', // Redirect URL after successful payment
+      cancel_url: '/cancel', // Redirect URL if payment is canceled
     });
 
     res.json({ id: session.id }); // Return the session ID to the client
