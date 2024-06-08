@@ -17,7 +17,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("https://alltruckrecycle.onrender.com/api/Test/items")
+    axios.get("https://alltruckrecycle.onrender.com/api/items")
       .then(response => {
         setParts(response.data);
       })
@@ -209,7 +209,7 @@ function App() {
         {isAdmin && (
         <div>
           <div className='Admin'>
-          <Link to="/Admin" className="nav-bar-link">
+          <Link to="/Admin">
               <p>
                 Admin
               </p>
