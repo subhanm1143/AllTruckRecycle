@@ -15,7 +15,8 @@ function App() {
   const [selectedYear, setSelectedYear] = useState('');
 
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
   const isSuccess = searchParams.get('success') === 'true';
   const isCanceled = searchParams.get('canceled') === 'true';
 
