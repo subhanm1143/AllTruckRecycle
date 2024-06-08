@@ -12,11 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 
 // Middleware
-app.use(cors({
-  origin: 'https://alltruckrecycling.onrender.com', // Allow requests from your frontend URL
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true // Allow cookies and credentials
-}));
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 

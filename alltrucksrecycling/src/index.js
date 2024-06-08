@@ -21,12 +21,12 @@ const router = (
   <Router> {/* Wrap your routes in the Router component */}
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="/about" element={<About />} />
+      <Route path="/About" element={<About />} />
       <Route path="/part/:id" element={<Part />} /> {/* Route for the Part component */}
       <Route path="/search/:input" element={<Search />} /> {/* Route for the Part component */}
       <Route path="/admin" element={<Admin />} />
       <Route path="/shippingPage" element={<Ship />} />
-      <Route path="/cart" element={<Cart />} />
+      <Route path="/Cart" element={<Cart />} />
       <Route path="/success" element={<Success />} />
       <Route path="/cancel" element={<Cancel />} />
     </Routes>

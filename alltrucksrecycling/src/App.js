@@ -17,7 +17,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("https://alltruckrecycle.onrender.com/api/items")
+    axios.get("https://alltruckrecycle.onrender.com/api/Test/items")
       .then(response => {
         setParts(response.data);
       })
@@ -207,7 +207,7 @@ function App() {
         {isAdmin && (
         <div>
           <div className='Admin'>
-            <a href="/Admin">
+            <a href="/admin">
               <p>
                 Admin
               </p>
