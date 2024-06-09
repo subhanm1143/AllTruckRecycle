@@ -7,11 +7,13 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config(); // Load environment variables
 const stripe = require('stripe')(process.env.STRIPE);
 const path = require('path');
-
-
+const { S3Client } = require('@aws-sdk/client-s3');
+const { Upload } = require('@aws-sdk/lib-storage');
+const multer = require('multer');
+const { Readable } = require('stream');
 
 const app = express();
-const PORT = process.env.PORT || 10000;
+const PORT = 10000;
 
 // Middleware
 app.use(cors());
@@ -28,6 +30,49 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log("Connected to MongoDB");
 });
+
+const s3Client = new S3Client({
+  region: process.env.AWS_REGION,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
+  },
+});
+
+// Set up multer for file uploads (memory storage)
+const upload = multer({ storage: multer.memoryStorage() });
+
+// Define a route to handle file uploads
+app.post('/upload', upload.single('file'), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).send('No file uploaded');
+  }
+
+  const fileStream = Readable.from(req.file.buffer);
+
+  const params = {
+    Bucket: 'alltruckrecycling',
+    Key: req.file.originalname,
+    Body: fileStream,
+    ContentType: req.file.mimetype, // Ensure the correct content type is set
+    ACL: 'public-read'
+  };
+
+  try {
+    const upload = new Upload({
+      client: s3Client,
+      params: params,
+    });
+
+    await upload.done();
+    console.log('File uploaded successfully');
+    res.status(200).send('File uploaded');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Failed to upload file');
+  }
+});
+
 
 // Define Schema and Model for items
 const itemSchema = new mongoose.Schema({
@@ -217,20 +262,43 @@ app.post("/api/users/login", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
-app.post('/api/authenticate', (req, res) => {
-  const { token } = req.body;
-
+// API Route to add a new make
+app.post("/api/carsearch/makes", async (req, res) => {
+  const { make, models } = req.body;
   try {
-    // Decode the token
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    // Check if the make already exists
+    const existingMake = await CarSearch.findOne({ make });
+    if (existingMake) {
+      return res.status(400).json({ error: "Make already exists" });
+    }
 
-    // If decoding is successful, token is valid
-    res.json({ success: true, message: 'Authentication successful', decodedToken });
+    // Create a new make
+    const newMake = new CarSearch({ make, models });
+    await newMake.save();
+    res.status(201).json(newMake);
   } catch (error) {
-    // If decoding fails, token is invalid
-    res.status(401).json({ success: false, message: 'Authentication failed', error: error.message });
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
   }
 });
+
+
+
+// API Route to delete a make
+app.delete("/api/carsearch/:makes", async (req, res) => {
+  const { make } = req.params;
+  try {
+    const deletedMake = await CarSearch.findOneAndDelete({ make });
+    if (!deletedMake) {
+      return res.status(404).json({ error: "Make not found" });
+    }
+    res.status(200).json({ message: `Make "${make}" deleted successfully` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 
 // API Route to add a new model to an existing make
 app.post("/api/carsearch/:make/models", async (req, res) => {
