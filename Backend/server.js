@@ -299,6 +299,20 @@ app.delete("/api/carsearch/:makes", async (req, res) => {
   }
 });
 
+app.post('/api/authenticate', (req, res) => {
+  const { token } = req.body;
+
+  try {
+    // Decode the token
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+    // If decoding is successful, token is valid
+    res.json({ success: true, message: 'Authentication successful', decodedToken });
+  } catch (error) {
+    // If decoding fails, token is invalid
+    res.status(401).json({ success: false, message: 'Authentication failed', error: error.message });
+  }
+});
 
 // API Route to add a new model to an existing make
 app.post("/api/carsearch/:make/models", async (req, res) => {

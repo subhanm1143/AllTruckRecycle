@@ -113,32 +113,45 @@ function Admin() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('https://alltruckrecycle.onrender.com/api/items', newPart)
-      .then(response => {
+    try {
+        let uploadedImageUrl = '';
+        if (selectedFile) {
+            // Upload the file and get the URL
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            const uploadResponse = await axios.post('https://alltruckrecycle.onrender.com/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            uploadedImageUrl = uploadResponse.data.url;
+        }
+
+        // Add the part with the uploaded image URL
+        const response = await axios.post('https://alltruckrecycle.onrender.com/api/items', {
+            ...newPart,
+            imageUrl: selectedFile.name,
+        });
+        
         alert('Part added successfully!');
         setNewPart({
-          name: '',
-          partNumber: '',
-          carYear: '',
-          carModel: '',
-          carMake: '',
-          description: '',
-          price: '',
-          imageUrl: ''
+            name: '',
+            partNumber: '',
+            carYear: '',
+            carModel: '',
+            carMake: '',
+            description: '',
+            price: '',
+            imageUrl: ''
         });
-        axios.get("https://alltruckrecycle.onrender.com/api/items")
-          .then(response => {
-            setParts(response.data);
-          })
-          .catch(error => console.error(error));
-      })
-      .catch(error => {
+        setParts(response.data);
+    } catch (error) {
         console.error('There was an error adding the part:', error);
         alert('There was an error adding the part. Please try again.');
-      });
-  };
+    }
+};
 
   const handleCardClick = (part) => {
     setSelectedPart(part);
@@ -200,14 +213,19 @@ function Admin() {
   };
 
   const search = (data) => {
+    if (!Array.isArray(data)) {
+        return [];
+    }
+    
     return data.filter((part) => {
-      return Object.keys(searchQueries).every((key) => {
-        const query = searchQueries[key]?.toLowerCase() || '';
-        const partValue = part[key]?.toString().toLowerCase() || '';
-        return partValue.includes(query);
-      });
+        return Object.keys(searchQueries).every((key) => {
+            const query = searchQueries[key]?.toLowerCase() || '';
+            const partValue = part[key]?.toString().toLowerCase() || '';
+            return partValue.includes(query);
+        });
     });
-  };
+};
+
   const handleMakeChange = (event) => {
     const make = event.target.value;
     setSelectedMake(make);
@@ -219,15 +237,24 @@ function Admin() {
     setSelectedModel(event.target.value);
   };
   const handleDeleteMake = (make) => {
-    const updatedCarSearches = carSearches.filter((carSearch) => carSearch.make !== make);
-    setCarSearches(updatedCarSearches);
-    // Clear selected make and models if deleted make matches
-    if (selectedMake === make) {
-      setSelectedMake('');
-      setSelectedModels([]);
-      setSelectedModel('');
-    }
+    axios.delete(`https://alltruckrecycle.onrender.com/api/carsearch/${make}`)
+      .then(response => {
+        alert(`Make "${make}" deleted successfully`);
+        const updatedCarSearches = carSearches.filter((carSearch) => carSearch.make !== make);
+        setCarSearches(updatedCarSearches);
+        // Clear selected make and models if deleted make matches
+        if (selectedMake === make) {
+          setSelectedMake('');
+          setSelectedModels([]);
+          setSelectedModel('');
+        }
+      })
+      .catch(error => {
+        console.error('Error deleting make:', error);
+        alert('Error deleting make. Please try again.');
+      });
   };
+  
 
   // Function to handle deleting a model
 const handleDeleteModel = (model) => {
@@ -245,22 +272,29 @@ const handleDeleteModel = (model) => {
     });
 };
 
-  const handleAddMake = () => {
-    // Check if the new make is not empty
-    if (newMake.trim() !== "") {
-      // Check if the new make already exists
-      if (carSearches.some(carSearch => carSearch.make === newMake)) {
-        alert("Make already exists!");
-      } else {
-        // Add the new make to the list of car searches
-        setCarSearches(prevCarSearches => [...prevCarSearches, { make: newMake, models: [] }]);
-        setNewMake(""); // Clear the input box after adding the make
-        alert(`Make "${newMake}" added successfully!`);
-      }
+const handleAddMake = () => {
+  if (newMake.trim() !== "") {
+    // Check if the new make already exists
+    if (carSearches.some(carSearch => carSearch.make === newMake)) {
+      alert("Make already exists!");
     } else {
-      alert("Please enter a valid make.");
+      // Send a POST request to add the new make
+      axios.post(`https://localhost:10000/api/carsearch/makes`, { make: newMake, models: [] })
+        .then(response => {
+          alert(`Make "${newMake}" added successfully!`);
+          setCarSearches(prevCarSearches => [...prevCarSearches, response.data]);
+          setNewMake(""); // Clear the input box after adding the make
+        })
+        .catch(error => {
+          console.error('Error adding make:', error);
+          alert('Error adding make. Please try again.');
+        });
     }
-  };
+  } else {
+    alert("Please enter a valid make.");
+  }
+};
+
   // Function to handle adding a new model
 const handleAddModel = () => {
   if (newModel.trim() !== "") {
@@ -282,6 +316,7 @@ const handleAddModel = () => {
   }
 };
 
+
 const startIndex = (currentPage - 1) * partsPerPage;
 const endIndex = startIndex + partsPerPage;
 const paginatedParts = search(items).slice(startIndex, endIndex);
@@ -290,8 +325,53 @@ const handlePageChange = (pageNumber) => {
   setCurrentPage(pageNumber);
 };
 
+const [selectedFile, setSelectedFile] = useState(null);
 
-  
+// Function to handle file selection
+const onFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+};
+
+// Function to handle file upload
+const onFileUpload = async () => {
+    if (selectedFile) {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        try {
+            // Upload the file to the server
+            const response = await axios.post('https://alltruckrecycle.onrender.com/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            console.log('File uploaded successfully:', response.data);
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            // Handle error
+        }
+    }
+};
+
+// Function to display file details
+const fileData = () => {
+    if (selectedFile) {
+        return (
+            <div>
+                <p>File Name: {selectedFile.name}</p>
+                <p>File Type: {selectedFile.type}</p>
+            </div>
+        );
+    } else {
+        return (
+            <div>
+                <br />
+                <h4>Choose a file before pressing the Upload button</h4>
+            </div>
+        );
+    }
+};
   
 
   return (
@@ -321,8 +401,9 @@ const handlePageChange = (pageNumber) => {
             <input type="text" name="carMake" placeholder="Car Make" value={newPart.carMake} onChange={handleChange} />
             <input type="text" name="description" placeholder="Description" value={newPart.description} onChange={handleChange} />
             <input type="text" name="price" placeholder="Price" value={newPart.price} onChange={handleChange} />
-            <input type="text" name="imageUrl" placeholder="Image" value={newPart.imageUrl} onChange={handleChange} />
-          </div>
+            <input type="file" onChange={onFileChange} />
+            </div>
+            {fileData()}
           <button type="submit">Add Part</button>
         </form>
       </div>
@@ -406,7 +487,7 @@ const handlePageChange = (pageNumber) => {
         ) : (
           paginatedParts.map((part) => (
             <div key={part._id} className="car-part-card" onClick={() => handleCardClick(part)}>
-              <img src={part.imageUrl} alt={part.name} />
+        <img src={`https://alltruckrecycling.s3.us-east-2.amazonaws.com/${part.imageUrl}`}  alt={part.name} />
               <h2>{part.carYear} {part.carMake} {part.carModel}</h2>
               <h2>{part.name}</h2>
               <p>{part.description}</p>

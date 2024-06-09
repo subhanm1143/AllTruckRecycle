@@ -11,6 +11,7 @@ function CarPartCard({ part }) {
     if (partInCart) {
       setIsInCart(true);
     }
+
   }, [part]);
 
   const addToCart = () => {
@@ -30,7 +31,7 @@ function CarPartCard({ part }) {
   return (
     <div className="car-part-card">
       <Link to={`/part/${part._id}`}>
-        <img src={part.imageUrl} alt={part.name} />
+        <img src={`https://alltruckrecycling.s3.us-east-2.amazonaws.com/${part.imageUrl}`}  alt={part.name} />
         <h2>{part.carYear} {part.carMake} {part.carModel}</h2>
         <h2>{part.name}</h2>
         <p>{part.description}</p>

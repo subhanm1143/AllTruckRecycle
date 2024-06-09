@@ -242,7 +242,7 @@ const removeFromCart = () => {
       </dialog>
       <div className="MainSection">
         <div className="ImageHolder">
-          <img src={part.imageUrl} alt={part.name} />
+        <img src={`https://alltruckrecycling.s3.us-east-2.amazonaws.com/${part.imageUrl}`}  alt={part.name} />
         </div>
         <div className="RightSide">
           <h1>{part.name}</h1>
