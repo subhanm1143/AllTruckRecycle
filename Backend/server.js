@@ -443,6 +443,19 @@ app.put('/api/sold/:id', async (req, res) => {
   }
 });
 
+app.post('/api/checkParts', async (req, res) => {
+  const { cartItems } = req.body;
+
+  try {
+    const availableParts = await Item.find({ _id: { $in: cartItems.map(item => item._id) } });
+    
+    res.json({ availableParts });
+  } catch (error) {
+    console.error('Error checking parts availability:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 // Start Server
 app.listen(PORT, () => {
