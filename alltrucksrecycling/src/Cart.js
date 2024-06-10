@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate, useParams } from 'react-router-dom';
-import './cart.css';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
+import './cart.css';
 
 function Cart() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -14,9 +14,8 @@ function Cart() {
   const [state, setState] = useState('');
   const [zipcode, setZipcode] = useState('');
 
-  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-
   useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
     checkPartsAvailability(cartItems);
   }, []);
 
@@ -33,8 +32,9 @@ function Cart() {
     try {
       const response = await axios.post('https://alltruckrecycle.onrender.com/api/checkParts', { cartItems });
       const availableParts = response.data.availableParts;
-      const updatedCart = cartItems.filter(part => availableParts.includes(part._id));
-      
+
+      // Ensure availableParts is an array of objects
+      const updatedCart = cartItems.filter(part => availableParts.some(ap => ap._id === part._id));
       setCart(updatedCart);
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       calculateTotalPrice(updatedCart);
