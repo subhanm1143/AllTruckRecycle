@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
-import './cart.css';
+import './carts.css';
 
 function Cart() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -206,12 +206,12 @@ function Cart() {
           />
         </div>
         <div className="Icons">
-          <div className="Profile">
+          <div className='Profile'>
             <p onClick={() => openDialog('profileDialog')}>
               <img className="logo" src="img/profile.png" alt="Profile" />
             </p>
           </div>
-          <div className="Cart">
+          <div className='Cart'>
             <Link to="/Cart">
               <p>
                 <img className="logo" src="/img/cart.png" alt="Cart" />
@@ -220,7 +220,7 @@ function Cart() {
           </div>
         </div>
       </div>
-
+      
       <dialog id="profileDialog">
         <h2>Profile</h2>
         {isLoggedIn ? (
@@ -258,24 +258,24 @@ function Cart() {
         )}
         {message && <p>{message}</p>}
       </dialog>
-
+      {/* Account Creation Dialog */}
       <dialog id="createAccountDialog">
         <h2>Create Account</h2>
         <form className="profile-form" onSubmit={handleAccountCreation}>
-          <label htmlFor="createEmail">Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
-            id="createEmail"
+            id="email"
             name="email"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <label htmlFor="createPassword">Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
-            id="createPassword"
+            id="password"
             name="password"
             placeholder="Enter your password"
             value={password}
@@ -287,91 +287,177 @@ function Cart() {
         </form>
       </dialog>
 
+      {/* Error Dialog */}
       <dialog id="errorDialog">
         <h2>Error</h2>
-        <p>Email already exists. Please login or use another email.</p>
-        <button type="button" onClick={() => closeDialog('errorDialog')}>Close</button>
+        <p>Account creation failed.</p>
+        <button onClick={() => closeDialog('errorDialog')}>Close</button>
       </dialog>
 
+      {/* Error Dialog for Login */}
       <dialog id="errorDialogLogin">
         <h2>Error</h2>
-        <p>Login failed. Please check your credentials and try again.</p>
-        <button type="button" onClick={() => closeDialog('errorDialogLogin')}>Close</button>
+        <p>Login failed.</p>
+        <button onClick={() => closeDialog('errorDialogLogin')}>Close</button>
       </dialog>
 
-      <dialog id="notLoggedDialog">
-        <h2>Not Logged In</h2>
-        <p>Please log in to complete your purchase.</p>
-        <button type="button" onClick={() => closeDialog('notLoggedDialog')}>Close</button>
-      </dialog>
-
+      {/* Success Dialog */}
       <dialog id="successDialog">
         <h2>Success</h2>
-        <p>Account created successfully. You are now logged in.</p>
-        <button type="button" onClick={() => closeDialog('successDialog')}>Close</button>
+        <p>Account created successfully.</p>
+        <button onClick={() => closeDialog('successDialog')}>Close</button>
       </dialog>
-
-      <h1>Shopping Cart</h1>
-      {cart.length === 0 ? (
-        <p>Your cart is empty</p>
-      ) : (
-        <div>
-          {cart.map((part, index) => (
-            <div key={index} className="cart-item">
-              <div className="part-image">
-                <img src={part.image} alt={part.name} />
-              </div>
-              <div className="part-details">
-                <p>{part.name}</p>
+      <dialog id="notLoggedDialog">
+        <h2>Not Logged In</h2>
+        <p>Log in to Checkout.</p>
+        <button onClick={() => closeDialog('notLoggedDialog')}>Close</button>
+      </dialog>
+      <div className="Cart-section">
+        <div className="yourcart">
+          <h1>Your Cart</h1>
+        </div>
+        {cart.length > 0 ? (
+          <div className="items">
+            {cart.map((part, index) => (
+              <div key={index} className="car-part-card">
+                 <Link to={`/part/${part._id}`}>
+                 <img src={`https://alltruckrecycling.s3.us-east-2.amazonaws.com/${part.imageUrl}`}  alt={part.name} />
+                 <h2>{part.carYear} {part.carMake} {part.carModel}</h2>
+                <h2>{part.name}</h2>
+                <p>{part.description}</p>
                 <p>Price: ${part.price}</p>
+                </Link>
+                <button onClick={() => handleRemove(index)} className="remove-from-cart-button">Remove</button>
               </div>
-              <button type="button" onClick={() => handleRemove(index)}>
-                Remove
-              </button>
-            </div>
-          ))}
-          <div className="total-price">Total Price: ${totalPrice}</div>
-          <div className="shipping-form">
-            <label htmlFor="address">Address:</label>
+            ))}
+          </div>
+        ) : (
+          <p>Your cart is empty</p>
+        )}
+          <div className="shipping-details">
+          <h2>Shipping Details</h2>
+          <div className="input-group big">
+        <label htmlFor="address">Street Address:</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          value={address}
+          onChange={handleAddressChange}
+          placeholder="Street Address"
+          required
+        />
+      </div>
+      <div className="input-group small">
+        <label htmlFor="city">City:</label>
+        <input
+          type="text"
+          id="city"
+          name="city"
+          value={city}
+          onChange={handleCityChange}
+          placeholder="City"
+          required
+        />
+      </div>
+      <div className="input-group small">
+        <label htmlFor="state">State:</label>
+        <input
+          type="text"
+          id="state"
+          name="state"
+          value={state}
+          onChange={handleStateChange}
+          placeholder="State"
+          required
+        />
+      </div>
+      <div className="input-group small">
+        <label htmlFor="zipcode">Zip Code:</label>
+        <input
+          type="text"
+          id="zipcode"
+          name="zipcode"
+          value={zipcode}
+          onChange={handleZipcodeChange}
+          placeholder="Zip Code"
+          required
+        />
+      </div>
+          <div className="input-group big">
+            <label htmlFor="email">Email:</label>
             <input
-              type="text"
-              id="address"
-              name="address"
-              value={address}
-              onChange={handleAddressChange}
-              required
-            />
-            <label htmlFor="city">City:</label>
-            <input
-              type="text"
-              id="city"
-              name="city"
-              value={city}
-              onChange={handleCityChange}
-              required
-            />
-            <label htmlFor="state">State:</label>
-            <input
-              type="text"
-              id="state"
-              name="state"
-              value={state}
-              onChange={handleStateChange}
-              required
-            />
-            <label htmlFor="zipcode">Zip Code:</label>
-            <input
-              type="text"
-              id="zipcode"
-              name="zipcode"
-              value={zipcode}
-              onChange={handleZipcodeChange}
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
               required
             />
           </div>
-          <button type="button" onClick={makePayment}>Proceed to Checkout</button>
         </div>
-      )}
+        <button type="submit" onClick={makePayment}>Confirm Payment</button>
+      </div>
+          
+
+      <footer>
+        <div className="container">
+          <p>
+            11407 Elks Cir, Rancho Cordova, CA 95742
+            <br />
+            +1(916) 638-3500
+            <br />
+          </p>
+          <div className="footer-right">
+            <a className="nav-bar-link" href="https://www.yelp.com/biz/all-trucks-recycling-rancho-cordova">
+              <p>
+                <img src="Icons\iconsYelp.png" alt="Yelp" />
+              </p>
+            </a>
+            <a className="nav-bar-link" href="https://www.facebook.com/alltrucksrecycling/">
+              <p>
+                <img src="Icons\iconsFacebook.png" alt="Facebook" />
+              </p>
+            </a>
+            <a className="nav-bar-link" href="https://www.google.com/maps/place/All+Trucks+Recycling/@38.5671157,-121.2559699,16z/data=!3m1!4b1!4m6!3m5!1s0x809ae81a3a571c01:0x9506e53facea0ca4!8m2!3d38.5671157!4d-121.253395!16s%2Fg%2F1tcv6krz?entry=ttu">
+              <p>
+                <img src="Icons\IconsGoogle.png" alt="Google" />
+              </p>
+            </a>
+          </div>
+        </div>
+        <footer className="map-footer">
+          <div className="container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12478.211261145601!2d-121.26369468261721!3d38.567115699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ae81a3a571c01%3A0x9506e53facea0ca4!2sAll%20Trucks%20Recycling!5e0!3m2!1sen!2sus!4v1716947188439!5m2!1sen!2sus"
+              width="900"
+              height="200"
+              style={{ border: '1px solid #ccc', borderRadius: '10px' }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <div className="footer-right">
+              <p>
+                Monday 8:00 am - 5:00 pm
+                <br />
+                Tuesday 8:00 am - 5:00 pm
+                <br />
+                Wednesday 8:00 am - 5:00 pm
+                <br />
+                Thursday 8:00 am - 5:00 pm
+                <br />
+                Friday 8:00 am - 5:00 pm
+                <br />
+                Saturday 9:00 am - 4:00 pm
+                <br />
+                Sunday Closed
+              </p>
+            </div>
+          </div>
+        </footer>
+      </footer>
     </div>
   );
 }
