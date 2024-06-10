@@ -127,7 +127,9 @@ const removeFromCart = () => {
     <div>
       <div className="Header">
         <a className="nav-bar-link" href="/">
-          <p><img className="logo" src="\img\Logo.png" alt="Logo" /></p>
+        <p className="logo">
+            <img className="logo" src="img/Logo.png" alt="Logo" />
+          </p>
         </a>
         <div className="search-container">
           <button type="search" onClick={handleSearch}>Search</button>

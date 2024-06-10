@@ -2155,12 +2155,14 @@ function App() {
             <p onClick={() => openDialog('profileDialog')}>
               <img className="logo" src="img/profile.png" alt="Profile" />
             </p>
+            <p>Login</p>
           </div>
           <div className='Cart'>
             <Link to="/Cart">
               <p>
                 <img className="logo" src="/img/cart.png" alt="Cart" />
               </p>
+              <p>Cart</p>
             </Link>
           </div>
         </div>
