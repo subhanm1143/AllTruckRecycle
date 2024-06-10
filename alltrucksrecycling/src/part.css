@@ -1,69 +1,85 @@
 .MainSection {
-    display: flex;
-    padding: 20px;
-    background: linear-gradient(to bottom, #7F8E9E, #476c8a);
+  display: flex;
+  padding: 20px;
+  background: linear-gradient(to bottom, #7F8E9E, #476c8a);
+}
+
+.ImageHolder {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-right: 20px;
+  width: 50%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ImageHolder img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.RightSide {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.RightSide h1 {
+  margin-top: 0;
+}
+
+.RightSide p {
+  margin: 10px 0;
+}
+
+.PriceSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.CartButton {
+  margin-left: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.CartButton:hover {
+  background-color: #45a049;
+}
+
+.RemoveButton {
+  background-color: rgb(196, 17, 17);
+}
+
+.RemoveButton:hover {
+  background-color: #a04545;
+}
+
+@media (max-width: 768px) {
+  .MainSection {
+    flex-direction: column; /* Stack the items vertically */
   }
-  
+
   .ImageHolder {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-right: 20px;
-    width: 50%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-right: 0; /* Remove right margin */
+    margin-bottom: 50px; /* Add space between the image and the right side content */
+    width: 100%; /* Full width */
   }
-  
-  .ImageHolder img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-  }
-  
+
   .RightSide {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+    width: 100%; /* Full width */
   }
-  
-  .RightSide h1 {
-    margin-top: 0;
-  }
-  
-  .RightSide p {
-    margin: 10px 0;
-  }
-  
-  .PriceSection {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .CartButton {
-    margin-left: 20px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .CartButton:hover {
-    background-color: #45a049;
-  }
-  .RemoveButton {
-    background-color: rgb(196, 17, 17);
-  }
-  .RemoveButton:hover {
-    background-color: #a04545;
-  }
-  
-  
+}
