@@ -13,6 +13,8 @@ body {
   text-align: center;
 }
 .Header .logo img {
+  margin:0;
+  padding: 0;
   width: 150px;
   height: auto;
 }
@@ -25,6 +27,11 @@ body {
   margin: 0px;
   transition: transform 0.3s ease;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 18px; /* Adjust font size */
+  font-weight: lighter;
+  margin-bottom: 0;
+  padding: 0;
+  color: #000000;
 }
 
 .nav-bar-link:hover p {

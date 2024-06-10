@@ -2119,6 +2119,7 @@ function App() {
     <div className="App">
       <div className="Header">
       <Link to="/About" className="nav-bar-link">
+      <p>Home</p>
           <p className="logo">
             <img className="logo" src="img/Logo.png" alt="Logo" />
           </p>
