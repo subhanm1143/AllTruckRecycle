@@ -407,34 +407,6 @@ const fileData = () => {
           <button type="submit">Add Part</button>
         </form>
       </div>
-      <div className="makesmodels-container">
-        <div>
-          <input type="text" placeHolder="Enter Make" className="Makes"value={newMake} onChange={e => setNewMake(e.target.value)} /> {/* Input for new make */}
-          <button className="MakesButton" onClick={handleAddMake}>Add Make</button> {/* Button to add new make */}
-          <select className="make-dropdown" value={selectedMake} onChange={handleMakeChange}>
-            <option value="">Select Make</option>
-            {carSearches.map((carSearch) => (
-              <option key={carSearch._id} value={carSearch.make}>{carSearch.make}</option>
-            ))}
-          </select>
-          <input type="text" placeHolder="Enter Model" className="Makes"value={newModel} onChange={e => setNewModel(e.target.value)} /> {/* Input for new make */}
-          <button className="MakesButton" onClick={handleAddModel}>Add Model</button> {/* Button to add new make */}
-        </div>
-        <div className="models-container">
-          <h3>Add or Remove Models and Makes</h3>
-          <ul>
-            {selectedModels.map((model, index) => (
-              <li key={index}>
-                {model}
-                <button onClick={() => handleDeleteModel(model)}>Delete</button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        {selectedMake && (
-          <button onClick={() => handleDeleteMake(selectedMake)}>Delete {selectedMake}</button>
-        )}
-      </div>
 
 
 
