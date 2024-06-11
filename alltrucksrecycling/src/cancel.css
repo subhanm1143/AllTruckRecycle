@@ -1,0 +1,45 @@
+.cancel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa; /* Light grey background */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .cancel-content {
+    text-align: center;
+    background: #ffffff; /* White background for the content */
+    padding: 40px 60px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for the box */
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .cancel-content h1 {
+    color: #ff4040; /* Red color for the heading */
+    margin-bottom: 20px;
+  }
+  
+  .cancel-content p {
+    color: #6c757d; /* Grey color for the paragraph */
+    margin-bottom: 30px;
+  }
+  
+  .continue-shopping-btn {
+    background-color: #007bff; /* Blue background */
+    color: #ffffff; /* White text */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .continue-shopping-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
