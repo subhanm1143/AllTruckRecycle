@@ -180,7 +180,7 @@ function Search() {
       <div className="Header">
         <a className="nav-bar-link" href="/">
         <p className="logo">
-            <img className="logo" src="img/Logo.png" alt="Logo" />
+            <img className="logo" src="/img/Logo.png" alt="Logo" />
           </p>
         </a>
         <div className="search-box">
