@@ -155,7 +155,6 @@ function Cart() {
     console.log(fullAddress);
     localStorage.setItem('fullAddress', fullAddress);
 
-    if (isLoggedIn) {
       try {
         const stripe = await loadStripe('pk_test_51POOu5DA12VOJZ8ODzkTH9WTd3M3RBa7OUMvQrOXJOIXFuZAl59m5AS9cunxJvyYrO4bgAZATeNvfhBPZAmEvDW300hPWq1Wx2');
         const body = {
@@ -185,9 +184,6 @@ function Cart() {
       } catch (error) {
         console.error('Error:', error);
       }
-    } else {
-      openDialog('notLoggedDialog');
-    }
   };
 
   return (
@@ -399,7 +395,7 @@ function Cart() {
             />
           </div>
         </div>
-        <button type="submit" onClick={makePayment}>Confirm Payment</button>
+        <button type="submit" onClick={makePayment}>Proceed To Checkout</button>
       </div>
           
 
